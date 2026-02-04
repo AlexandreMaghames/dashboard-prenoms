@@ -1,0 +1,44 @@
+# Bytecode Python et caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.cfg
+
+# Fichiers temporaires/éditeurs
+*.swp
+*.swo
+
+# Environnements virtuels
+.venv/
+
+# Logs 
+logs/
+
+# Variables d'environnement (sensibles)
+.env
+.env.*
+appmusic/
+
+# Checkpoints Jupyter
+.ipynb_checkpoints/
+
+# Données générées / exports - ignorer tout dans data/
+data/*
+
+# Fichiers de données tabulaires courants (Excel, CSV, JSON)
+*.json
+*.xlsx
+*.xls
+*.csv
+*.db
+
+# Verrouillage Poetry
+poetry.lock
+
+# Dossiers et fichiers VS Code
+.vscode/
+
+# Dossier privé dans notebook, ignoré sauf le fichier .gitkeep pour garder le dossier dans Git
+notebooks/private/*
+!notebooks/private/.gitkeep
