@@ -15,11 +15,6 @@ import json
 
 st.set_page_config(page_title="Dashboard - Prénoms", layout="wide")
 
-import os
-
-st.write("Current dir:", os.getcwd())
-st.write("Files in data/output:", os.listdir("data/output"))
-
 
 # ========================
 # 📥 Load data (cached)
