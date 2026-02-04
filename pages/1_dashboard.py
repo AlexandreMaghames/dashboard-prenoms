@@ -157,3 +157,41 @@ with col2:
         agg_dep_year, geojsons["dep"], cfg_dep, global_max
     )
     st.plotly_chart(fig_dep, width="stretch")
+
+
+# ========================
+# Popularité
+# ========================
+st.subheader(f"📌 Informations générales")
+top_names = (
+    data[data["name"] != "_PRENOMS_RARES"]
+    .groupby("name", as_index=False)
+    .agg(count=("count", "sum"))
+    .sort_values("count", ascending=False)
+)
+import plotly.express as px
+
+top_20 = top_names.head(20)
+
+fig_bar = px.bar(
+    top_20,
+    x="name",
+    y="count",
+    title="Top 20 des prénoms les plus donnés en France",
+)
+
+st.plotly_chart(fig_bar, width="stretch")
+
+st.markdown("Occurrence des prénoms par sexe :")
+
+agg_sex = data.groupby("sex", as_index=False).agg(count=("count", "sum"))
+sex_counts = agg_sex.set_index("sex")["count"].to_dict()
+nb_boy = int(sex_counts.get("1", 0))  # 1 = garçons
+nb_girl = int(sex_counts.get("2", 0))  # 2 = filles
+
+col1, col2 = st.columns(2)
+with col1:
+    st.metric("👦 Garçons", f"{nb_boy:,}".replace(",", " "))
+
+with col2:
+    st.metric("👧 Filles", f"{nb_girl:,}".replace(",", " "))
