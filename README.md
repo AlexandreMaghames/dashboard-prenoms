@@ -13,13 +13,21 @@ Cette application Streamlit permet d’explorer l’évolution du nombre de nais
 project/
 │
 ├─ data/
-│  └─ geojson/                 # Fichiers GeoJSON (optionnels pour la géolocalisation)
+│  └─ geojson/                 # Fichiers GeoJSON (pour localisations)
+│  └─ dpt2022_csv/             # Data des prénoms
+│
+├─ notebooks/
+│  └─ analysis_exploration.ipynb    # Exploration des fonctionnalités du projet
+│  └─ ETL_geojson.ipynb             # Formattage des données GeoJSON
 │
 ├─ src/
 │  ├─ data_preprocessing/
 │  │    └─ process_data.py     # Script pour traiter et préparer les données
 │  ├─ filter_aggregate/        # Fonctions pour filtrer et agréger les données
 │  └─ visualisation/           # Fonctions pour générer les graphiques
+│
+├─ pages/
+│  └─ 1_dashboard.py             # Dashboard Streamlit principal
 │
 ├─ home.py                      # Script principal Streamlit
 ├─ requirements.txt             # Dépendances Python
@@ -38,7 +46,6 @@ Lancer l'interface avec :
 ```python
 streamlit run home.py
 ```
-
 
 ## Contributors
 [MAGHAMES Alexandre](https://github.com/AlexandreMaghames)
