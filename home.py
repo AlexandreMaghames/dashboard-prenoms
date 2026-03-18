@@ -16,4 +16,10 @@ On pourra visualiser ces prénoms selon :
 👉 Utilise le menu à gauche pour aller sur la page **Dashboard**.
 """)
 
-st.success("➡️ Clique sur **Dashboard** dans la barre latérale pour commencer !")
+st.success("➡️ Sélectionne **Dashboard** dans la barre latérale pour commencer !")
+st.page_link(
+    "pages/1_dashboard.py",
+    label="Accéder au Dashboard",
+    icon="🚀",
+    use_container_width=True,
+)
