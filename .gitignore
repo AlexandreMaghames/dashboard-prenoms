@@ -33,9 +33,6 @@ appmusic/
 # *.csv
 # *.db
 
-# Verrouillage Poetry
-poetry.lock
-
 # Dossiers et fichiers VS Code
 .vscode/
 
