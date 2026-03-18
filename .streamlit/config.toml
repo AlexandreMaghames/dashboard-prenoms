@@ -1,0 +1,16 @@
+[global]
+developmentMode = false
+showWarningOnDirectExecution = false
+
+[theme]
+base = "dark"
+primaryColor = "#FF4B4B"
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#262730"
+textColor = "#FAFAFA"
+
+[server]
+headless = true
+port = 8501
+enableCORS = false
+enableXsrfProtection = true
