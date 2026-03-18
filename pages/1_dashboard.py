@@ -49,23 +49,20 @@ def load_all_geojson():
 
 
 @st.cache_data
-def prepare_name_data(data, name):
-    filter_name = filter_and_complete_data(data, name)
+def prepare_all_dashboard_data(_data, name, _reg_dep):
+    # filtrage sur le prénom
+    df_name = filter_and_complete_data(_data, name)
 
-    # Agrégations lourdes
-    agg_sex = aggregate_df_by_sexe(filter_name)
-    agg_year = aggregate_df_name_by_year(filter_name)
-    return filter_name, agg_sex, agg_year
+    # agrégations simples pour les indicateurs et la courbe
+    agg_sex = aggregate_df_by_sexe(df_name)
+    agg_year = aggregate_df_name_by_year(df_name)
 
-
-@st.cache_data
-def prepare_geo_data(filter_name, _reg_dep):
-    # merge lourd une seule fois
-    merged = merge_df_code_reg_dep(filter_name, _reg_dep)
-    # agrégations lourdes une seule fois
+    # préparation Géo (Jointure avec les départements/régions)
+    merged = merge_df_code_reg_dep(df_name, _reg_dep)
     agg_reg = aggregate_over_regions(merged)
     agg_dep = aggregate_over_departements(merged)
-    return merged, agg_reg, agg_dep
+
+    return agg_sex, agg_year, agg_reg, agg_dep
 
 
 @st.cache_data
@@ -107,10 +104,10 @@ with tab_search:
     #### Select NAME
     name = st.selectbox("Choisi un prénom :", NAMES, index=default_index)
 
-    filter_name, agg_sex, agg_year = prepare_name_data(data, name)
-    merged, agg_reg, agg_dep = prepare_geo_data(filter_name, reg_dep)
-
-    years_available = sorted(filter_name["year"].unique())
+    agg_sex, agg_year, agg_reg, agg_dep = prepare_all_dashboard_data(
+        data, name, reg_dep
+    )
+    years_available = sorted(agg_year["year"].unique())
 
     st.markdown(
         f"Statistiques pour le prénom **{name}**",
@@ -150,12 +147,13 @@ with tab_search:
     # 🗺️ Carte par année
     # ========================
     st.subheader(f"🗺️ Répartition géographique")
+    st.markdown("##### 🗓️ Année")
 
     year_selected = st.select_slider(
-        "##### 🗓️ Année",
+        label="",
         options=years_available,
-        # value=years_available,  # dernière année par défaut
     )
+
     cfg_reg = _get_geo_config("reg")
     cfg_dep = _get_geo_config("dep")
 

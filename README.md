@@ -29,7 +29,7 @@ project/
 ├─ pages/
 │  └─ 1_dashboard.py             # Dashboard Streamlit principal
 │
-├─ home.py                      # Script principal Streamlit
+├─ app.py                      # Script principal Streamlit
 ├─ requirements.txt             # Dépendances Python
 └─ README.md
 ```
@@ -44,7 +44,7 @@ python src/data_preprocessing/process_data.py
 
 Lancer l'interface avec :
 ```python
-streamlit run home.py
+streamlit run app.py
 ```
 
 ## Contributors
