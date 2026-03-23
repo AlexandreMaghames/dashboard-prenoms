@@ -134,12 +134,14 @@ def complete_year_dept_panel(df_name, all_depts, years):
 
 
 def filter_and_complete_data(df, name):
+    """Filter and complete the dataframe."""
     df_filtered = filter_data_by_name(df, name)
     df_filtered = complete_year_dept_panel(df_filtered, ALL_DEPTS, YEARS)
     return df_filtered
 
 
 def aggregate_df_by_sexe(df_filtered):
+    """Aggregation the dataframe by sex."""
     return df_filtered.groupby("sex").agg(occ=("sex", "count"))
 
 
@@ -149,6 +151,9 @@ def aggregate_df_name_by_year(df_filtered_name):
 
 
 def merge_df_code_reg_dep(filtered_name_data, reg_dep):
+    """
+    Merge filtered name data with the reg-dep data based on the department code.
+    """
     merged_data = filtered_name_data.merge(
         reg_dep, how="left", left_on="dept", right_on="code_dep"
     )
@@ -156,6 +161,7 @@ def merge_df_code_reg_dep(filtered_name_data, reg_dep):
 
 
 def aggregate_over_regions(merged_data):
+    """Aggregate over regions and years."""
     agg_reg = merged_data.groupby(
         ["nom_reg", "code_reg", "geometry_region", "year"], as_index=False
     ).agg({"count": "sum"})
@@ -163,6 +169,7 @@ def aggregate_over_regions(merged_data):
 
 
 def aggregate_over_departements(merged_data):
+    """Aggregate over departements and years."""
     agg_dep = merged_data.groupby(
         ["dept", "code_dep", "nom_dep", "geometry_departement", "year"], as_index=False
     ).agg({"count": "sum"})
@@ -170,5 +177,6 @@ def aggregate_over_departements(merged_data):
 
 
 def filter_data_over_year(df, year):
+    """filter the dataframe by year."""
     filtered = df[df["year"] == year]
     return filtered
