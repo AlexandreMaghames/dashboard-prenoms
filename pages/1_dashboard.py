@@ -146,7 +146,7 @@ with tab_search:
     # ========================
     # 🗺️ Carte par année
     # ========================
-    st.subheader(f"🗺️ Répartition géographique")
+    st.subheader("🗺️ Répartition géographique")
     st.markdown("##### 🗓️ Année")
 
     year_selected = st.select_slider(
@@ -184,7 +184,7 @@ with tab_global:
     # ========================
     # Popularité
     # ========================
-    st.subheader(f"📌 Informations générales")
+    st.subheader("📌 Informations générales")
 
     top_20, sex_counts = load_global_stats(data)
 
