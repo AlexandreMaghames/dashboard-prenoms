@@ -42,10 +42,12 @@ Pour lancer le projet en local :
 python src/data_preprocessing/process_data.py
 ```
 
-Lancer l'interface avec :
+Lancer l'interface avec localement :
 ```python
 streamlit run app.py
 ```
+
+Lien vers le [dashboard](https://dashboard-prenoms-sedeuncvnp3tmdtgd5jwqb.streamlit.app/).
 
 ## Contributors
 [MAGHAMES Alexandre](https://github.com/AlexandreMaghames)
