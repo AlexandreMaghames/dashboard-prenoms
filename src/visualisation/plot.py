@@ -3,7 +3,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.express as px
-import json
 import geopandas as gpd
 from src.filter_aggregate.functions import (
     aggregate_over_regions,
@@ -99,35 +98,4 @@ def plot_map_interactive_plotly(df_year, geojson, cfg, global_max):
         hover_name=cfg["name_col"] if cfg["name_col"] in df_year.columns else None,
     )
     fig.update_layout(margin=dict(r=0, t=0, l=0, b=0), height=700)
-    return fig
-
-
-def plot_map_france(df_agg_year, year, mode: str = "reg"):
-    if mode == "reg":
-        geometry = "geometry_region"
-        mode_label = "région"
-    elif mode == "dep":
-        geometry = "geometry_departement"
-        mode_label = "departement"
-    else:
-        raise ValueError("Le paramètre 'mode' doit être 'reg' ou 'dep'.")
-    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
-
-    gdf_valid = gpd.GeoDataFrame(df_agg_year, geometry=geometry)
-    gdf_valid.plot(
-        column="count",
-        cmap="Blues",
-        linewidth=0.8,
-        edgecolor="0.5",
-        legend=True,
-        ax=ax,
-        legend_kwds={"shrink": 0.5, "aspect": 20, "pad": 0.01},
-    )
-
-    ax.set_title(
-        f"Répartition par {mode_label} sur l'année {year}",
-        fontsize=14,
-        # fontweight="bold",
-    )
-    ax.set_axis_off()
     return fig
